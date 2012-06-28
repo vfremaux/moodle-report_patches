@@ -23,15 +23,16 @@ function report_patches_scan($path){
         $excludepatterns = split(" ", @$CFG->report_patches_scanexcludes);
 
         // some standard
+        $excludepatterns[] = '^\.git$';
         $excludepatterns[] = '^pix$';
         $excludepatterns[] = '^CVS$';
         $excludepatterns[] = '\.(jpg|png|gif|log|txt|swf|pdf)$';
-        $excludepatterns[] = 'README';
+        $excludepatterns[] = 'README|readme';
 
         foreach($excludepatterns as $apattern){
             if (!empty($apattern) && preg_match("/$apattern/", $entry)) {
                 // echo "rejecting $entry on pattern $apattern<br/>";
-                continue;
+                continue 2;
             }
         }
 
