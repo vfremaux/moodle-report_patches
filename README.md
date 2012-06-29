@@ -26,3 +26,10 @@ launching full code scan all the time.
 Patch list result can be sorted by "source file", or by "reason" so giving a view of all changes in
 the same file, or conversely all changes needed by a single feazture, pursuant the marking is consistant
 for this feature.
+
+Location and installation
+=========================
+
+Installs very simlply by dropping the report directory in : 
+
+&lt;moodleroot&gt;/admin/report
