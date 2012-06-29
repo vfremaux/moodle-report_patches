@@ -27,8 +27,8 @@ Patch list result can be sorted by "source file", or by "reason" so giving a vie
 the same file, or conversely all changes needed by a single feazture, pursuant the marking is consistant
 for this feature.
 
-Locaztion and installation
-==========================
+Location and installation
+=========================
 
 Installs very simply by dropping the code in :
 
