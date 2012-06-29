@@ -13,7 +13,7 @@ A report that scans core patches and help control migration of patched codebases
 Principle
 =========
 
-Pursuant all patches are integrated with consistant start and end range markers, the Core Patch Report
+Pursuant all patchs are integrated with consistant start and end range markers, the Core Patch Report
 provides a code scanner that inspect all Moodle source and searches for start/end pairs so the changes
 in core will be indexed and identified.
 
