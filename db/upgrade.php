@@ -1,5 +1,4 @@
 <?php
-
 // This file keeps track of upgrades to
 // the chat module
 //
@@ -17,13 +16,21 @@
 // The commands in here will all be database-neutral,
 // using the functions defined in lib/ddllib.php
 
-function xmldb_report_patches_upgrade($oldversion=0){
-    
+/**
+ * Manage patches in Moodle code.
+ *
+ * @author Valery Fremaux valery@edunao.com
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @package report_patches
+ * @category report
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+function xmldb_report_patches_upgrade($oldversion=0) {
     global $CFG, $THEME, $db;
 
     $result = true;
 
     return $result;
 }
-
-?>
