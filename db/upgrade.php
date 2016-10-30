@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 function xmldb_report_patches_upgrade($oldversion = 0) {
-    global $DB;
+    global $DB, $CFG;
 
     $result = true;
 
@@ -43,6 +43,13 @@ function xmldb_report_patches_upgrade($oldversion = 0) {
         set_config('report_patches_openpattern', null);
         set_config('report_patches_closepattern', null);
         set_config('report_patches_scanexcludes', null);
+
+        // Restore some defaults if missing.
+        $config = get_config('report_patches');
+        if (empty($config->openpattern)) {
+            set_config('openpattern', '// PATCH+', 'report_patches');
+            set_config('closepattern', '// PATCH-', 'report_patches');
+        }
 
         $table = new xmldb_table('patches');
         if ($dbman->table_exists($table)) {

@@ -32,6 +32,8 @@ define('END_MATCHED', 2);
 function report_patches_scan($path) {
     global $CFG, $DB;
 
+    $config = get_config('report_patches');
+
     $dir = opendir($path);
     while ($entry = readdir($dir)) {
         if (preg_match('/^\./', $entry)) {
@@ -39,7 +41,7 @@ function report_patches_scan($path) {
         }
 
         // Make some exludes for optimization.
-        $excludepatterns = explode(' ', @$CFG->report_patches_scanexcludes);
+        $excludepatterns = explode(' ', @$config->scanexcludes);
 
         // Some standard.
         $excludepatterns[] = '^x_.*';
@@ -64,13 +66,13 @@ function report_patches_scan($path) {
             $state = 0;
             $maxline = count($buffer);
  
-            if (empty($CFG->report_patches_openpattern)) {
-                set_config('report_patches_openpattern', '//!? PATCH');
-                set_config('report_patches_closepattern', '//!? /PATCH');
+            if (empty($config->openpattern)) {
+                set_config('openpattern', '// PATCH+', 'report_patches');
+                set_config('closepattern', '// PATCH-', 'report_patches');
             }
 
-            $openpattern = str_replace('/', '\\/', $CFG->report_patches_openpattern);
-            $closepattern = str_replace('/', '\\/', $CFG->report_patches_closepattern);
+            $openpattern = str_replace('/', '\\/', $config->openpattern);
+            $closepattern = str_replace('/', '\\/', $config->closepattern);
             for ($i = 0; $i < $maxline - 1; $i++) {
                 switch ($state) {
                     case IDLE:
