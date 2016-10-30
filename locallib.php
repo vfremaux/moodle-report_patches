@@ -14,14 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * @author Valery Fremaux valery@valeisti.fr
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package report_patches
  * @category report
  */
+defined('MOODLE_INTERNAL') || die();
 
 define('IDLE', 0);
 define('START_MATCHED', 1);
@@ -33,14 +32,16 @@ define('END_MATCHED', 2);
 function report_patches_scan($path) {
     global $CFG, $DB;
 
-    $DIR = opendir($path);
-    while ($entry = readdir($DIR)) {
+    $config = get_config('report_patches');
+
+    $dir = opendir($path);
+    while ($entry = readdir($dir)) {
         if (preg_match('/^\./', $entry)) {
             continue;
         }
 
         // Make some exludes for optimization.
-        $excludepatterns = explode(' ', @$CFG->report_patches_scanexcludes);
+        $excludepatterns = explode(' ', @$config->scanexcludes);
 
         // Some standard.
         $excludepatterns[] = '^x_.*';
@@ -52,32 +53,30 @@ function report_patches_scan($path) {
 
         foreach ($excludepatterns as $apattern) {
             if (!empty($apattern) && preg_match("/$apattern/", $entry)) {
-                // echo " => rejecting $entry on pattern $apattern<br/>";
                 continue 2;
             }
         }
 
         if (is_dir("$path/$entry")) {
-            // echo "found dir : $path/$entry<br/>";
             report_patches_scan("$path/$entry");
         } else {
             $buffer = file("$path/$entry");
-            $buffer = str_replace('\r', '', $buffer); // normalize to unix code
+            $buffer = str_replace('\r', '', $buffer); // Normalize to unix code.
 
             $state = 0;
             $maxline = count($buffer);
  
-            if (empty($CFG->report_patches_openpattern)) {
-                set_config('report_patches_openpattern', '//!? PATCH');
-                set_config('report_patches_closepattern', '//!? /PATCH');
+            if (empty($config->openpattern)) {
+                set_config('openpattern', '// PATCH+', 'report_patches');
+                set_config('closepattern', '// PATCH-', 'report_patches');
             }
 
-            $openpattern = str_replace('/', '\\/', $CFG->report_patches_openpattern);
-            $closepattern = str_replace('/', '\\/', $CFG->report_patches_closepattern);
-            for ($i = 0  ; $i < $maxline - 1; $i++) {
+            $openpattern = str_replace('/', '\\/', $config->openpattern);
+            $closepattern = str_replace('/', '\\/', $config->closepattern);
+            for ($i = 0; $i < $maxline - 1; $i++) {
                 switch ($state) {
                     case IDLE:
-                        while($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
+                        while ($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
                             $i++;
                         }
                         if ($i < $maxline) {
@@ -89,6 +88,7 @@ function report_patches_scan($path) {
                             $patchrec->comment = addslashes($matches[1]);
                         }
                         break;
+
                     case START_MATCHED:
                         while ($i <= $maxline - 1 && !preg_match("/{$closepattern}/", $buffer[$i])) {
                             $i++;
@@ -101,8 +101,9 @@ function report_patches_scan($path) {
                             }
                         }
                         break;
+
                     case END_MATCHED : 
-                        while($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
+                        while ($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
                             $i++;
                         }
                         if ($i < $maxline) {
@@ -121,4 +122,5 @@ function report_patches_scan($path) {
             unset($buffer);
         }
     }
+    closedir($dir);
 }
