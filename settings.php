@@ -14,40 +14,46 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @author Valery Fremaux valery@valeisti.fr
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @package report_patches
+ * @category report
+ */
+
 defined('MOODLE_INTERNAL') || die;
 
-// if ($hassiteconfig) { // needs this condition or there is error on login page
-$hasadmin = false;
 if (is_dir($CFG->dirroot.'/local/adminsettings')) {
-    // This is AdminSettings Edunao driven administration 
-    if (has_capability('local/adminsettings:nobody', $systemcontext)) {
-        $hasadmin = true;
-    }
+    // Integration driven code.
+    require_once($CFG->dirroot.'/local/adminsettings/lib.php');
+    list($hasconfig, $hassiteconfig, $capability) = local_adminsettings_access();
 } else {
-    // this is Moodle Standard
-    if ($ADMIN->fulltree) {
-        $hasadmin = true;
-    }
+    // Standard Moodle code.
+    $capability = 'moodle/site:config';
+    $hasconfig = $hassiteconfig = has_capability($capability, context_system::instance());
 }
 
-if ($hasadmin) {
+if ($hasconfig) {
 
-    $ADMIN->add('reports', new admin_externalpage('reportpatchesaccess', get_string('patches', 'report_patches'), new moodle_url('/report/patches/index.php'), 'moodle/site:config'));
+    $label = get_string('patches', 'report_patches');
+    $pageurl = new moodle_url('/report/patches/index.php');
+    $ADMIN->add('reports', new admin_externalpage('reportpatchesaccess', $label, $pageurl, 'moodle/site:config'));
 
     $temp = new admin_settingpage('patches', get_string('patchessettings', 'report_patches'));
-    $temp->add(new admin_setting_configtext('report_patches_openpattern', 
-                                                   get_string('config_patches_openpattern', 'report_patches'),
-                                                   get_string('desc_patches_openpattern', 'report_patches'),
-                                                   '// PATCH'));
 
-    $temp->add(new admin_setting_configtext('report_patches_closepattern', 
-                                                   get_string('config_patches_closepattern', 'report_patches'),
-                                                   get_string('desc_patches_closepattern', 'report_patches'),
-                                                   '// /PATCH'));
+    $key = 'report_patches/openpattern';
+    $label = get_string('config_patches_openpattern', 'report_patches');
+    $desc = get_string('desc_patches_openpattern', 'report_patches');
+    $temp->add(new admin_setting_configtext($key, $label, $desc, '// PATCH'));
 
-    $temp->add(new admin_setting_configtext('report_patches_scanexcludes', 
-                                                   get_string('config_patches_scanexcludes', 'report_patches'),
-                                                   get_string('desc_patches_scanexcludes', 'report_patches'),
-                                                   ''));
+    $key = 'report_patches/closepattern';
+    $label = get_string('config_patches_closepattern', 'report_patches');
+    $desc = get_string('desc_patches_closepattern', 'report_patches');
+    $temp->add(new admin_setting_configtext($key, $label, $desc, '// /PATCH'));
+
+    $key = 'report_patches/scanexcludes';
+    $label = get_string('config_patches_scanexcludes', 'report_patches');
+    $desc = get_string('desc_patches_scanexcludes', 'report_patches');
+    $temp->add(new admin_setting_configtext($key, $label, $desc, ''));
     $ADMIN->add('server', $temp);
 }
