@@ -33,7 +33,7 @@ if (is_dir($CFG->dirroot.'/local/adminsettings')) {
     $hasconfig = $hassiteconfig = has_capability($capability, context_system::instance());
 }
 
-if ($hasadmin) {
+if ($hasconfig) {
 
     $label = get_string('patches', 'report_patches');
     $pageurl = new moodle_url('/report/patches/index.php');
@@ -42,17 +42,17 @@ if ($hasadmin) {
     $temp = new admin_settingpage('patches', get_string('patchessettings', 'report_patches'));
 
     $key = 'report_patches/openpattern';
-    $label = get_string('config_patches/openpattern', 'report_patches');
+    $label = get_string('config_patches_openpattern', 'report_patches');
     $desc = get_string('desc_patches_openpattern', 'report_patches');
     $temp->add(new admin_setting_configtext($key, $label, $desc, '// PATCH'));
 
     $key = 'report_patches/closepattern';
-    $label = get_string('config_patches/closepattern', 'report_patches');
+    $label = get_string('config_patches_closepattern', 'report_patches');
     $desc = get_string('desc_patches_closepattern', 'report_patches');
     $temp->add(new admin_setting_configtext($key, $label, $desc, '// /PATCH'));
 
     $key = 'report_patches/scanexcludes';
-    $label = get_string('config_patches/scanexcludes', 'report_patches');
+    $label = get_string('config_patches_scanexcludes', 'report_patches');
     $desc = get_string('desc_patches_scanexcludes', 'report_patches');
     $temp->add(new admin_setting_configtext($key, $label, $desc, ''));
     $ADMIN->add('server', $temp);
