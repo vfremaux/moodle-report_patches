@@ -65,7 +65,7 @@ function report_patches_scan($path) {
 
             $state = 0;
             $maxline = count($buffer);
- 
+
             if (empty($config->openpattern)) {
                 set_config('openpattern', '// PATCH+', 'report_patches');
                 set_config('closepattern', '// PATCH-', 'report_patches');
@@ -102,7 +102,7 @@ function report_patches_scan($path) {
                         }
                         break;
 
-                    case END_MATCHED : 
+                    case END_MATCHED :
                         while ($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
                             $i++;
                         }
