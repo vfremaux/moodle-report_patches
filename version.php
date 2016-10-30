@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details.
+ * Version detals.
  *
  * @package     report_patches
  * @category    report
@@ -26,10 +26,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2014110400;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2016103000;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2014110400;        // Requires this Moodle version.
 $plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
-$plugin->release = '2.8.0 (Build 2012062800)';
+$plugin->release = '2.8.0 (Build 2016103000)';
 $plugin->maturity = MATURITY_STABLE;
 
 // Non moodle attributes.
