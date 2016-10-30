@@ -29,7 +29,7 @@ require('../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->dirroot.'/report/patches/locallib.php');
 
-// Security. 
+// Security.
 
 require_login();
 require_capability('moodle/site:config', context_system::instance());
@@ -37,7 +37,7 @@ require_capability('moodle/site:config', context_system::instance());
 ini_set('memory_limit', '2048M');
 @set_time_limit(0);
 
-// MVC
+// MVC.
 $action = optional_param('what', '', PARAM_TEXT);
 
 if ($action == 'scan') {
@@ -105,7 +105,8 @@ if (!empty($patches)) {
 }
 
 echo '<p><center>';
-echo $OUTPUT->single_button(new moodle_url('/report/patches/index.php', array('what' => 'scan')), get_string('scan', 'report_patches'));
+$buttonurl = new moodle_url('/report/patches/index.php', array('what' => 'scan'));
+echo $OUTPUT->single_button($buttonurl, get_string('scan', 'report_patches'));
 echo '</center></p>';
 
 // Footer.
