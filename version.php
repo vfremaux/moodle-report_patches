@@ -17,19 +17,19 @@
 /**
  * Version details.
  *
- * @package    report_patches
- * @category   report
- * @author     Valery Fremaux (valery.fremaux@gmail.com)
- * @copyright  2010 onwards Valery Fremaux (valery.fremaux@gmail.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     report_patches
+ * @category    report
+ * @author      Valery Fremaux <valery.fremaux@gmail.com>
+ * @copyright   2010 onwards Valery Fremaux (http://www.mylearningfactory.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2012062800;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016051900;        // Requires this Moodle version
-$plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics)
-$plugin->release = '3.1.0 (Build 2012062800)'; // Full name of the plugin (used for diagnostics)
+$plugin->version   = 2016103000;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2016051900;        // Requires this Moodle version.
+$plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
+$plugin->release = '3.1.0 (Build 2016103000)';
 $plugin->maturity = MATURITY_STABLE;
 
 // Non moodle attributes.
