@@ -96,7 +96,7 @@ function report_patches_scan($path) {
                         if ($i < $maxline) {
                             $state = END_MATCHED;
                             $patchrec->lineend = $i + 1;
-                            if (!$DB->insert_record('patches', $patchrec)) {
+                            if (!$DB->insert_record('report_patches', $patchrec)) {
                                 print_error('errorcouldnotinsert', 'report_patches');
                             }
                         }
