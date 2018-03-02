@@ -1,5 +1,4 @@
-<?php // $Id: version.php,v 1.3 2011-12-09 15:14:08 vf Exp $
-
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,18 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version info
+ * Version details.
  *
- * @package    report
- * @subpackage patches
- * @copyright  2010 Valery Fremaux
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     report_patches
+ * @category    report
+ * @author      Valery Fremaux <valery.fremaux@gmail.com>
+ * @copyright   2010 onwards Valery Fremaux (http://www.mylearningfactory.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2012062800;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2011110200;        // Requires this Moodle version
-$plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics)
+$plugin->version   = 2016103000;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2017110800;        // Requires this Moodle version.
+$plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
+$plugin->release = '3.4.0 (Build 2016103000)';
+$plugin->maturity = MATURITY_STABLE;
 
-?>
+// Non moodle attributes.
+$plugin->codeincrement = '3.4.0000';
