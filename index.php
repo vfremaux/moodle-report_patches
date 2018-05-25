@@ -43,7 +43,7 @@ $action = optional_param('what', '', PARAM_TEXT);
 if ($action == 'scan') {
     $memlimit = ini_get('memory_limit');
     ini_set('memory_limit', '512M');
-    $DB->delete_records('report_patches');
+    $DB->delete_records('patches');
     report_patches_scan($CFG->dirroot);
     redirect(new moodle_url('/report/patches/index.php'));
 }
@@ -58,7 +58,7 @@ echo $OUTPUT->heading(get_string('patchlist', 'report_patches'), 2);
 
 $order = optional_param('order', 'path', PARAM_TEXT);
 
-$patches = $DB->get_records('report_patches', array(), $order);
+$patches = $DB->get_records('patches', array(), $order);
 
 $locationstr = get_string('location', 'report_patches');
 $startlinestr = get_string('startline', 'report_patches');
