@@ -58,6 +58,10 @@ function report_patches_scan($path) {
         }
 
         if (is_dir("$path/$entry")) {
+            if (realpath("$path/$entry") == realpath($path)) {
+                return;
+            }
+
             report_patches_scan("$path/$entry");
         } else {
             $buffer = file("$path/$entry");
@@ -96,7 +100,7 @@ function report_patches_scan($path) {
                         if ($i < $maxline) {
                             $state = END_MATCHED;
                             $patchrec->lineend = $i + 1;
-                            if (!$DB->insert_record('patches', $patchrec)) {
+                            if (!$DB->insert_record('report_patches', $patchrec)) {
                                 print_error('errorcouldnotinsert', 'report_patches');
                             }
                         }

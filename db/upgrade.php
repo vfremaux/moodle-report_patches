@@ -35,9 +35,9 @@ function xmldb_report_patches_upgrade($oldversion = 0) {
     if ($oldversion < 2016103000) {
 
         // Convert settings to component scoped settings.
-        set_config('openpattern', 'report_patches', $CFG->report_patches_openpattern);
-        set_config('closepattern', 'report_patches', $CFG->report_patches_closepattern);
-        set_config('scanexcludes', 'report_patches', $CFG->report_patches_scanexludes);
+        set_config('openpattern', $CFG->report_patches_openpattern, 'report_patches');
+        set_config('closepattern', $CFG->report_patches_closepattern, 'report_patches');
+        set_config('scanexcludes', @$CFG->report_patches_scanexludes, 'report_patches');
 
         // Cleanup site wide settings.
         set_config('report_patches_openpattern', null);
