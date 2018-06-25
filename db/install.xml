@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="report/patches/db" VERSION="20090603" COMMENT="XMLDB file for Moodle report/patches"
+<XMLDB PATH="admin/report/etl/db" VERSION="20090603" COMMENT="XMLDB file for Moodle admin/report/etl"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
     <TABLE NAME="report_patches" COMMENT="Stores patches identified in the code">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
-        <FIELD NAME="plugin" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false"/>
-        <FIELD NAME="path" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false"/>
-        <FIELD NAME="linestart" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false"/>
-        <FIELD NAME="lineend" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false"/>
-        <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false" ENUM="false"/>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="plugin"/>
+        <FIELD NAME="plugin" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="path"/>
+        <FIELD NAME="path" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="plugin" NEXT="linestart"/>
+        <FIELD NAME="linestart" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="path" NEXT="lineend" />
+        <FIELD NAME="lineend" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="linestart" NEXT="comment" />
+        <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="lineend" />
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
