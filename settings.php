@@ -42,12 +42,12 @@ if ($hassiteconfig) {
     $key = 'report_patches/openpattern';
     $label = get_string('config_patches_openpattern', 'report_patches');
     $desc = get_string('desc_patches_openpattern', 'report_patches');
-    $settings->add(new admin_setting_configtext($key, $label, $desc, '// PATCH'));
+    $settings->add(new admin_setting_configtext($key, $label, $desc, '// PATCH+'));
 
     $key = 'report_patches/closepattern';
     $label = get_string('config_patches_closepattern', 'report_patches');
     $desc = get_string('desc_patches_closepattern', 'report_patches');
-    $settings->add(new admin_setting_configtext($key, $label, $desc, '// /PATCH'));
+    $settings->add(new admin_setting_configtext($key, $label, $desc, '// PATCH-'));
 
     $key = 'report_patches/scanexcludes';
     $label = get_string('config_patches_scanexcludes', 'report_patches');

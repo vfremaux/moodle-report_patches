@@ -71,8 +71,8 @@ function report_patches_scan($path) {
                 set_config('closepattern', '// PATCH-', 'report_patches');
             }
 
-            $openpattern = str_replace('/', '\\/', $config->openpattern);
-            $closepattern = str_replace('/', '\\/', $config->closepattern);
+            $openpattern = str_replace('/', '\\/', preg_quote($config->openpattern));
+            $closepattern = str_replace('/', '\\/', preg_quote($config->closepattern));
             for ($i = 0; $i < $maxline - 1; $i++) {
                 switch ($state) {
                     case IDLE:
