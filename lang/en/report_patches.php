@@ -21,6 +21,9 @@
  * @category report
  */
 
+// Privacy.
+$string['privacy:metadata'] = "The Patch Report does not store any data belonging to users";
+
 $string['config_patches_closepattern'] = 'Patch closing pattern';
 $string['config_patches_openpattern'] = 'Patch opening pattern';
 $string['config_patches_scanexcludes'] = 'Scanner exclusion patterns';

@@ -51,6 +51,7 @@ function report_patches_scan($path){
                 set_config('report_patches_openpattern', '//!? PATCH');
                 set_config('report_patches_closepattern', '//!? /PATCH');
             }
+<<<<<<< HEAD
             
             $openpattern = str_replace('/', '\\/', $CFG->report_patches_openpattern);
             $closepattern = str_replace('/', '\\/', $CFG->report_patches_closepattern);
@@ -59,6 +60,18 @@ function report_patches_scan($path){
                     case IDLE :
                         while($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) $i++;
                         if ($i < $maxline){
+=======
+
+            $openpattern = str_replace('/', '\\/', preg_quote($config->openpattern));
+            $closepattern = str_replace('/', '\\/', preg_quote($config->closepattern));
+            for ($i = 0; $i < $maxline - 1; $i++) {
+                switch ($state) {
+                    case IDLE:
+                        while ($i <= $maxline - 1 && !preg_match("/{$openpattern}\\s*:\\s*(.*)/", $buffer[$i], $matches)) {
+                            $i++;
+                        }
+                        if ($i < $maxline) {
+>>>>>>> MOODLE_35_STABLE
                             $state = START_MATCHED;
                             $patchrec = new StdClass();
                             $patchrec->plugin = '';
