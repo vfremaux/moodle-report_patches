@@ -27,6 +27,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->version   = 2018052500;        // The current plugin version (Date: YYYYMMDDXX).
+<<<<<<< HEAD
 $plugin->requires  = 2018042700;        // Requires this Moodle version.
 $plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
 $plugin->release = '3.5.0 (Build 2018052500)';
@@ -34,3 +35,12 @@ $plugin->maturity = MATURITY_STABLE;
 
 // Non moodle attributes.
 $plugin->codeincrement = '3.5.0000';
+=======
+$plugin->requires  = 2018112800;        // Requires this Moodle version.
+$plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
+$plugin->release = '3.6.0 (Build 2018052500)';
+$plugin->maturity = MATURITY_STABLE;
+
+// Non moodle attributes.
+$plugin->codeincrement = '3.6.0000';
+>>>>>>> MOODLE_36_STABLE
