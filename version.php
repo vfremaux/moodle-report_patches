@@ -31,6 +31,7 @@ $plugin->requires  = 2020060900;        // Requires this Moodle version.
 $plugin->component = 'report_patches'; // Full name of the plugin (used for diagnostics).
 $plugin->release = '3.9.0 (Build 2018052500)';
 $plugin->maturity = MATURITY_STABLE;
+$plugin->supported = [39,311];
 
 // Non moodle attributes.
 $plugin->codeincrement = '3.9.0000';
